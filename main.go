@@ -1,36 +1,27 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
-	"github.com/pkg/errors"
-	"time"
+	"context"
+	"github.com/beego/beego/v2/client/orm"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	getUserDetailByUserName(123)
+	//getHomeWorkHanderMng().getHomeworkHandler("homeworkFirst").homeworkDoSomething(context.Background())
+	getHomeWorkHanderMng().getHomeworkHandler("homeworkSecond").homeworkDoSomething(context.Background())
 }
 
-// SmsDetail ...
-type UserInfo struct {
-	userId   int `gorm:"primary_key;AUTO_INCREMENT;column:id"`
-	userName time.Time
-	age      int
-	gender   string
+func funcName(ch chan int) {
+	select {
+	case i := <-ch:
+		println(i)
+
+	default:
+		println("default")
+	}
 }
 
-func getUserDetailByUserName(userId int) (*UserInfo, error) {
-	var userInfo UserInfo
-	db, err := sql.Open("mysql", "root:qishiwang5@tcp(127.0.0.1:3306)/slo_test?charset=utf8&parseTime=true")
-	if err != nil {
-		return &userInfo, errors.Wrap(err, "connet mysql err")
-	}
-	defer db.Close()
-	sqlStr := fmt.Sprintf("select * from sms_record_202111 where userId = %d", userId)
-	rows, err := db.Query(sqlStr)
-	fmt.Println(rows)
-	if err != nil && err != sql.ErrNoRows {
-		return &userInfo, errors.Wrap(err, fmt.Sprintf("get Datas err sql is %s", sqlStr))
-	}
-	return &userInfo, nil
+func init() {
+	orm.RegisterDriver("mysql", orm.DRMySQL)
+	orm.RegisterDataBase("default", "mysql", "root:qishiwang5@tcp(127.0.0.1:3306)/slo_test?charset=utf8&parseTime=true")
 }
