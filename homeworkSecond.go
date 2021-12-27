@@ -17,6 +17,7 @@ type homeworkSecond struct {
 
 func (h *homeworkSecond) homeworkDoSomething(ctx context.Context) error {
 	ctx2, cancel := context.WithTimeout(ctx, time.Second*3)
+	defer cancel()
 	srv := &http.Server{Addr: ":8080"}
 	group, errCxt := errgroup.WithContext(ctx2)
 	group.Go(func() error {
@@ -48,7 +49,7 @@ func helloServer(w http.ResponseWriter, req *http.Request) {
 }
 
 func sign() chan os.Signal {
-	sigs := make(chan os.Signal)
+	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	return sigs
 }

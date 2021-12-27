@@ -1,14 +1,14 @@
 package main
 
 import (
-	"context"
 	"github.com/beego/beego/v2/client/orm"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-	//getHomeWorkHanderMng().getHomeworkHandler("homeworkFirst").homeworkDoSomething(context.Background())
-	getHomeWorkHanderMng().getHomeworkHandler("homeworkSecond").homeworkDoSomething(context.Background())
+
+	getHomeWorkHanderMng().getHomeworkHandler("homeworkFirst").homeworkDoSomething(context.Background())
+	//getHomeWorkHanderMng().getHomeworkHandler("homeworkSecond").homeworkDoSomething(context.Background())
 }
 
 func init() {
