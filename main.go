@@ -9,7 +9,8 @@ import (
 func main() {
 	//getHomeWorkHanderMng().getHomeworkHandler("homeworkFirst").homeworkDoSomething(context.Background())
 	//getHomeWorkHanderMng().getHomeworkHandler("homeworkSecond").homeworkDoSomething(context.Background())
-	getHomeWorkHanderMng().getHomeworkHandler("homeworkFour").homeworkDoSomething(context.Background())
+	//getHomeWorkHanderMng().getHomeworkHandler("homeworkFour").homeworkDoSomething(context.Background())
+	getHomeWorkHanderMng().getHomeworkHandler("homeworkSix").homeworkDoSomething(context.Background())
 }
 
 func init() {
